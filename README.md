@@ -14,7 +14,7 @@ cd
 git clone <this-repo>
 
 # create a soft link
-ln -s ~/.tmux.conf ~/.tmux/tmux.conf
+ln -s ~/.tmux/tmux.conf ~/.tmux.conf
 ```
 
 ## goals
