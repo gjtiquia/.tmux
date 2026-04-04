@@ -25,6 +25,13 @@ meaning no `tpm` plugins, just vanilla, plug-and-play `tmux`
 
 maybe in the future i'll entertain and play with `tpm` but for now, just vanilla
 
+## cheatsheet
+
+reload tmux config
+```bash
+tmux source-file ~/.tmux.conf
+```
+
 ## troubleshooting
 
 ### ssh from ghostty and running tmux
