@@ -1,22 +1,35 @@
 #!/bin/bash
-
 if [ -z "$1" ]; then
   echo "Usage: tmux-new <session-name>" >&2
   exit 1
 fi
 
 SESSION_NAME=$1
+BASE_INDEX=1
+
+wait_for_prompt() {
+  local target="$1"
+  while true; do
+    local last_line
+    last_line=$(tmux capture-pane -t "$target" -p | sed '/^$/d' | tail -1)
+    if [ -n "$last_line" ]; then
+      break
+    fi
+    sleep 0.05
+  done
+}
+
 tmux new-session -d -s "$SESSION_NAME"
-
-tmux send-keys -t "$SESSION_NAME:1" "c" Enter
-tmux send-keys -t "$SESSION_NAME:1" "ff" Enter
-tmux send-keys -t "$SESSION_NAME:1" "v"
-
 tmux new-window -t "$SESSION_NAME"
-tmux send-keys -t "$SESSION_NAME:2" "c" Enter
-tmux send-keys -t "$SESSION_NAME:2" "lg"
-
 tmux new-window -t "$SESSION_NAME"
 
-tmux select-window -t "$SESSION_NAME:1"
+tmux select-window -t "$SESSION_NAME:$BASE_INDEX"
+
+wait_for_prompt "$SESSION_NAME:$BASE_INDEX"
+tmux send-keys -t "$SESSION_NAME:$BASE_INDEX" "v"
+
+wait_for_prompt "$SESSION_NAME:$((BASE_INDEX + 1))"
+tmux send-keys -t "$SESSION_NAME:$((BASE_INDEX + 1))" "lg"
+
+tmux select-window -t "$SESSION_NAME:$BASE_INDEX"
 tmux attach-session -t "$SESSION_NAME"
