@@ -23,13 +23,13 @@ tmux new-session -d -s "$SESSION_NAME"
 tmux new-window -t "$SESSION_NAME"
 tmux new-window -t "$SESSION_NAME"
 
-tmux select-window -t "$SESSION_NAME:$BASE_INDEX"
+# tmux select-window -t "$SESSION_NAME:$BASE_INDEX"
 
-wait_for_prompt "$SESSION_NAME:$BASE_INDEX"
-tmux send-keys -t "$SESSION_NAME:$BASE_INDEX" "v"
+# wait_for_prompt "$SESSION_NAME:$BASE_INDEX"
+# tmux send-keys -t "$SESSION_NAME:$BASE_INDEX" "v"
 
-wait_for_prompt "$SESSION_NAME:$((BASE_INDEX + 1))"
-tmux send-keys -t "$SESSION_NAME:$((BASE_INDEX + 1))" "lg"
+# wait_for_prompt "$SESSION_NAME:$((BASE_INDEX + 1))"
+# tmux send-keys -t "$SESSION_NAME:$((BASE_INDEX + 1))" "lg"
 
 tmux select-window -t "$SESSION_NAME:$BASE_INDEX"
 tmux attach-session -t "$SESSION_NAME"
