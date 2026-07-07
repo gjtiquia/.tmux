@@ -1,10 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ]; then
-  echo "Usage: tmux-new <session-name>" >&2
-  exit 1
-fi
-
-SESSION_NAME=$1
+SESSION_NAME="${1:-$(basename "$PWD")}"  # use arg or default to current dir name
 BASE_INDEX=1
 
 wait_for_prompt() {
