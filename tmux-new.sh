@@ -1,7 +1,10 @@
 #!/bin/bash
+
 SESSION_NAME="${1:-$(basename "$PWD")}"  # use arg or default to current dir name
 BASE_INDEX=1
 
+# tho unused, keeping here for now
+# as of now, we dont really wait, so its as fast and snappy as possible, muscle memory is good enough
 wait_for_prompt() {
   local target="$1"
   while true; do
