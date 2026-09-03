@@ -3,6 +3,11 @@
 SESSION_NAME="${1:-$(basename "$PWD")}"  # use arg or default to current dir name
 BASE_INDEX=1
 
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+  printf 'tmux session "%s" already exists.\n' "$SESSION_NAME" >&2
+  exit 1
+fi
+
 # tho unused, keeping here for now
 # as of now, we dont really wait, so its as fast and snappy as possible, muscle memory is good enough
 wait_for_prompt() {
